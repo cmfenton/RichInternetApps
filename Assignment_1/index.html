@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Assignment 1 Shapes</title>
 </head>
 <body>
+   <p id="totalCount">Total Shapes: </p>
+    <div id="square">
+        <hr/>
+        <h2>Square</h2>
+        <p>Square Count: <div id="squareCount"></div> </p>
+        <label>Size: </label><input type="text" name="squareSize">
+        <button onclick="addSquare()">Add A New Square</button><br/>
+    </div>
 
+    <div id="rectangle">
+        <hr/>
+        <h2>Rectangle</h2>
+        <p id="rectangleCount">Rectangle Count: </p>
+        <label>Length: </label><input type="text" name="rectangleLength">
+        <label>Width: </label><input type="text" name="rectangleWidth">
+        <button>Add A New Rectangle</button><br/>
+    </div>
+
+    <div id="triangle">
+        <hr/>
+        <h2>Triangle</h2>
+        <p id="triangleCount">Triangle Count: </p>
+        <label>Height: </label><input type="text" name="triangleHeight">
+        <label>Base: </label><input type="text" name="triangleBase">
+        <button>Add A New Triangle</button><br/>
+    </div>
+
+    <div id="circle">
+        <hr/>
+        <h2>Circle</h2>
+        <p id="circleCount">Circle Count: </p>
+        <label>Radius: </label><input type="text" name="circleRadius">
+        <button>Add A New Circle</button><br/>
+    </div>
+    <hr/>
+    <script src="Shapes.js">
+    </script>
 </body>
 </html>
