@@ -96,7 +96,7 @@ function addRectangle()
 
     //check how many rectangles there are now
     var numRectangles = myRectangle.countRectangles();
-    //if the number of rectangles is 10, disable the add square button
+    //if the number of rectangles is 10, disable the add rectangle button
     if (numRectangles == 10)
     {
         rectangleButton.disabled = true;
@@ -147,7 +147,7 @@ function addTriangle()
 
     //check how many triangles there are now
     var numTriangles = myTriangle.countTriangles();
-    //if the number of squares is 10, disable the add square button
+    //if the number of squares is 10, disable the add triangle button
     if (numTriangles == 10)
     {
         triangleButton.disabled = true;
@@ -174,3 +174,38 @@ function Circle(radius)
 }
 //override of area calculation
 Circle.prototype.area = function() {return Math.PI*(Math.pow((this.radius), 2));};
+//count the number of circles
+Circle.prototype.countCircles = (function () {
+    var circles = 0;
+    return function () {return circles += 1;}
+})();
+//function that creates a triangle, increments counters, and updates the html
+function addCircle()
+{
+    //get the html elements that need to be changed
+    var circleCounter = document.getElementById("circleCount");
+    var totalCounter = document.getElementById("totalCount");
+    var circleArea = document.getElementById("circle");
+    var circleButton= document.getElementById("circleButton");
+
+    //get the user input for size
+    var radiusInput = document.getElementById("circleRadius").value;
+
+    //create a circle with the radius input
+    var myCircle= new Circle(radiusInput);
+
+    //check how many triangles there are now
+    var numCircles= myCircle.countCircles();
+    //if the number of squares is 10, disable the add circle button
+    if (numCircles == 10)
+    {
+        circleButton.disabled = true;
+    }
+
+    //update the html with new information
+    circleCounter.innerHTML = "Circle Count: " + numCircles;
+    totalCounter.innerHTML = "Total Shapes: " + countTotal();
+    circleArea.innerHTML += "</br>" + "Circle #"+ numCircles+"<br/>";
+    circleArea.innerHTML += "Radius: "+  myCircle.radius+"<br/>";
+    circleArea.innerHTML += "Area: " + myCircle.area() + "<br/>";
+}
