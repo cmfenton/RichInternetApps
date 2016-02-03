@@ -1,22 +1,68 @@
-//superclass
-function Shape (){}
-Shape.prototype.area = function(){ return "Shape Area";};
+/////////////////////////
+///Shape - Superclass///
+///////////////////////
 
-//subclass
+//
+function Shape (){}
+//to be overridden
+Shape.prototype.area = function(){ return "Shape Area";};
+//function that is called to count all shapes
+var countTotal = (function () {
+    var total = 0;
+    return function () {return total += 1;}
+})();
+
+/////////////
+///Square///
+///////////
+
+//constructor
 function Square(size)
 {
     Shape.call(this);
     this.size = size;
 }
-Square.prototype.add = (function () {
-    var counter = 0;
-    return function () {return counter += 1;}
+//count the number of shapes
+Square.prototype.countSquares = (function () {
+    var squares = 0;
+    return function () {return squares += 1;}
 })();
+//override - calculates the area of a square
+Square.prototype.area = function() {return Math.pow(this.size, 2);};
 
-//override
-Square.prototype.area = function() {return this.size * this.size;}
+//function that creates a square, increments counters, and updates the html
+function addSquare()
+{
+    //get the html elements that need to be changed
+    var squareCounter = document.getElementById("squareCount");
+    var totalCounter = document.getElementById("totalCount");
+    var squareArea = document.getElementById("square");
+    var squareButton = document.getElementById("squareButton");
 
-//subclass
+    //get the user input for size
+    var sizeInput = document.getElementById("squareSize").value;
+
+    //create a square with the size input
+    var mySquare = new Square(sizeInput);
+
+    //check how many squares there are now
+    var numSquares = mySquare.countSquares();
+    //if the number of squares is 10, disable the add square button
+    if (numSquares == 10)
+    {
+        squareButton.disabled = true;
+    }
+
+    //update the html with new information
+    squareCounter.innerHTML = "Square Count: " + numSquares;
+    totalCounter.innerHTML = "Total Shapes: " + countTotal();
+    squareArea.innerHTML += "</br>" + "Square #"+ numSquares +"<br/>";
+    squareArea.innerHTML += "Size: " + mySquare.size + " x " + mySquare.size + "<br/>";
+    squareArea.innerHTML += "Area: " + mySquare.area() + "<br/>";
+}
+
+
+//subclass Rectangle
 function Rectangle(length, width)
 {
     Shape.call(this);
@@ -26,7 +72,7 @@ function Rectangle(length, width)
 //override
 Rectangle.prototype.area = function() {return this.length * this.width;};
 
-//subclass
+//subclass Triangle
 function Triangle(base, height)
 {
     Shape.call(this);
@@ -36,7 +82,7 @@ function Triangle(base, height)
 //override
 Triangle.prototype.area = function() {return (this.base * this.height)/2;};
 
-//subclass
+//subclass Circle
 function Circle(radius)
 {
     Shape.call(this);
@@ -44,16 +90,3 @@ function Circle(radius)
 }
 //override
 Circle.prototype.area = function() {return Math.PI*(Math.pow((this.radius), 2));};
-
-var add = (function () {
-    var counter = 0;
-    return function () {return counter += 1;}
-})();
-
-function addSquare()
-{
-    var square = document.getElementById("squareC");
-    var mySquare = new Square(5);
-
-    square.innerHTML = mySquare.add();
-}
